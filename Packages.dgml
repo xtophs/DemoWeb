@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Antlr 3.4.1.9004" Category="Package" Bounds="533.99,167.88,102.053333333333,25.96" Label="Antlr 3.4.1.9004" />
+    <Node Id="Microsoft.AspNet.Mvc 5.2.2" Category="Package" Bounds="124.643333333333,55.9600000000003,164.746666666667,25.96" Label="Microsoft.AspNet.Mvc 5.2.2" />
+    <Node Id="Microsoft.AspNet.Razor 3.2.2" Category="Package" Bounds="92.72,167.88,172.593333333333,25.96" Label="Microsoft.AspNet.Razor 3.2.2" />
+    <Node Id="Microsoft.AspNet.Web.Optimization 1.1.3" Category="Package" Bounds="320.02,55.9600000000003,237.993333333333,25.96" Label="Microsoft.AspNet.Web.Optimization 1.1.3" />
+    <Node Id="Microsoft.AspNet.WebPages 3.2.2" Category="Package" Bounds="210.215,111.92,197.603333333333,25.96" Label="Microsoft.AspNet.WebPages 3.2.2" />
+    <Node Id="Microsoft.Azure.KeyVault.Core 0.9.1-preview" Category="Package" Bounds="832.703333333333,167.88,252.626666666667,25.96" Label="Microsoft.Azure.KeyVault.Core 0.9.1-preview" />
+    <Node Id="Microsoft.Data.Edm 5.6.2" Category="Package" Bounds="1481.19666259766,305.382310846967,151.64,25.96" Label="Microsoft.Data.Edm 5.6.2" />
+    <Node Id="Microsoft.Data.OData 5.6.2" Category="Package" Bounds="1532.06332926432,249.422210846967,161.906666666667,25.96" Label="Microsoft.Data.OData 5.6.2" />
+    <Node Id="Microsoft.Data.Services.Client 5.6.2" Category="Package" Bounds="1458.24999593099,193.462110846967,203.533333333333,25.96" Label="Microsoft.Data.Services.Client 5.6.2" />
+    <Node Id="Microsoft.IdentityModel.Clients.ActiveDirectory 2.16.204221202" Category="Package" Bounds="1401.78262555178,-30.3782891325672,354.673333333333,25.96" Label="Microsoft.IdentityModel.Clients.ActiveDirectory 2.16.204221202" UseManualLocation="True" />
+    <Node Id="Microsoft.KeyVault.Client" Category="Project" Bounds="9.47166666666666,335.76,151.283333333333,25.96" Label="Microsoft.KeyVault.Client" />
+    <Node Id="Microsoft.KeyVault.WebKey" Category="Project" Bounds="1190.085,111.92,163.863333333333,25.96" Label="Microsoft.KeyVault.WebKey" />
+    <Node Id="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package" Bounds="296.213333333333,167.88,207.606666666667,25.96" Label="Microsoft.Web.Infrastructure 1.0.0.0" />
+    <Node Id="Microsoft.WindowsAzure.ConfigurationManager 1.8.0.0" Category="Package" Bounds="1116.08666259766,193.462110846967,311.86,25.96" Label="Microsoft.WindowsAzure.ConfigurationManager 1.8.0.0" />
+    <Node Id="Microsoft.jQuery.Unobtrusive.Validation 3.2.2" Category="Package" Bounds="1745.165,55.96,257.703333333333,25.96" Label="Microsoft.jQuery.Unobtrusive.Validation 3.2.2" />
+    <Node Id="Modernizr 2.6.2" Category="Package" Bounds="1481.75832926432,81.5419108469671,102.516666666667,25.96" Label="Modernizr 2.6.2" />
+    <Node Id="Newtonsoft.Json 6.0.8" Category="Package" Bounds="666.29,167.88,135.453333333333,25.96" Label="Newtonsoft.Json 6.0.8" />
+    <Node Id="Newtonsoft.Json 7.0.1-beta3" Category="Package" Bounds="0,391.72,170.226666666667,25.96" Label="Newtonsoft.Json 7.0.1-beta3" />
+    <Node Id="Respond 1.2.0" Category="Package" Bounds="0,55.9600000000003,94.0333333333333,25.96" Label="Respond 1.2.0" />
+    <Node Id="System.Spatial 5.6.2" Category="Package" Bounds="1663.20666259766,305.382310846967,123.62,25.96" Label="System.Spatial 5.6.2" />
+    <Node Id="Web2" Category="Project" Bounds="1425.74672363281,25.5818108469671,50.54,25.96" Label="Web2" />
+    <Node Id="WebGrease 1.5.2" Category="Package" Bounds="530.953333333333,111.92,108.126666666667,25.96" Label="WebGrease 1.5.2" />
+    <Node Id="WindowsAzure.Storage 4.4.1-preview" Category="Package" Bounds="1451.87326822917,137.502010846967,216.286666666667,25.96" Label="WindowsAzure.Storage 4.4.1-preview" />
+    <Node Id="bootstrap 3.0.0" Category="Package" Bounds="1615.23166666667,55.96,99.5699999999999,25.96" Label="bootstrap 3.0.0" />
+    <Node Id="jQuery 1.10.2" Category="Package" Bounds="1829.33333333333,167.88,89.3666666666666,25.96" Label="jQuery 1.10.2" />
+    <Node Id="jQuery.Validation 1.11.1" Category="Package" Bounds="1698.80333333333,111.92,144.426666666667,25.96" Label="jQuery.Validation 1.11.1" />
+  </Nodes>
+  <Links>
+    <Link Source="Microsoft.AspNet.Mvc 5.2.2" Target="Microsoft.AspNet.Razor 3.2.2" Category="Package Dependency" Bounds="179.016662597656,81.9199981689453,21.50537109375,76.9600067138672" />
+    <Link Source="Microsoft.AspNet.Mvc 5.2.2" Target="Microsoft.AspNet.WebPages 3.2.2" Category="Package Dependency" Bounds="230.675704956055,81.9199981689453,46.7913970947266,25.6710510253906" />
+    <Link Source="Microsoft.AspNet.Web.Optimization 1.1.3" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" Bounds="414.208679199219,81.9199981689453,24.8079833984375,78.5762634277344" />
+    <Link Source="Microsoft.AspNet.Web.Optimization 1.1.3" Target="WebGrease 1.5.2" Category="Package Dependency" Bounds="472.881561279297,81.9199981689453,69.8663635253906,26.7789154052734" />
+    <Link Source="Microsoft.AspNet.WebPages 3.2.2" Target="Microsoft.AspNet.Razor 3.2.2" Category="Package Dependency" Bounds="217.436981201172,137.880004882813,61.4259948730469,26.4415283203125" />
+    <Link Source="Microsoft.AspNet.WebPages 3.2.2" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" Bounds="330.124237060547,137.880004882813,41.1184387207031,25.2855682373047" />
+    <Link Source="Microsoft.Data.OData 5.6.2" Target="Microsoft.Data.Edm 5.6.2" Category="Package Dependency" Bounds="1576.37214603722,275.382210846967,23.655261716357,23.6384073423841" />
+    <Link Source="Microsoft.Data.OData 5.6.2" Target="System.Spatial 5.6.2" Category="Package Dependency" Bounds="1638.99517228581,275.382210846967,51.9919889654011,25.9774723366317" />
+    <Link Source="Microsoft.Data.Services.Client 5.6.2" Target="Microsoft.Data.OData 5.6.2" Category="Package Dependency" Bounds="1572.31006450366,219.422110846967,22.2244071293405,23.4656612339361" />
+    <Link Source="Microsoft.KeyVault.Client" Target="Newtonsoft.Json 7.0.1-beta3" Category="Installed Package" Bounds="85.1133346557617,361.720001220703,0,21" />
+    <Link Source="Microsoft.KeyVault.WebKey" Target="Microsoft.Azure.KeyVault.Core 0.9.1-preview" Category="Installed Package" Bounds="1040.47693154524,137.880001525879,158.93888963217,28.4160414871952" />
+    <Link Source="Microsoft.KeyVault.WebKey" Target="Microsoft.Data.Services.Client 5.6.2" Category="Installed Package" Bounds="1317.86089996685,137.880001525879,187.651867166246,53.1302979998621" />
+    <Link Source="Microsoft.KeyVault.WebKey" Target="Microsoft.WindowsAzure.ConfigurationManager 1.8.0.0" Category="Installed Package" Bounds="1272.01661127817,137.880001525879,3.48672156178509E-05,46.5821093210907" />
+    <Link Source="Microsoft.KeyVault.WebKey" Target="Newtonsoft.Json 6.0.8" Category="Installed Package" Bounds="795.0498046875,132.146759033203,395.03515625,34.9403991699219" />
+    <Link Source="Microsoft.jQuery.Unobtrusive.Validation 3.2.2" Target="jQuery 1.10.2" Category="Package Dependency" Bounds="1874.01672363281,81.919998626709,0,76.9601016276042" />
+    <Link Source="Microsoft.jQuery.Unobtrusive.Validation 3.2.2" Target="jQuery.Validation 1.11.1" Category="Package Dependency" Bounds="1802.81587938987,81.919998626709,47.3098372137904,25.7034660065081" />
+    <Link Source="Web2" Target="Microsoft.AspNet.Mvc 5.2.2" Category="Installed Package" Bounds="297.730529785156,40.5719184875488,1128.01617431641,58.3022651672363" />
+    <Link Source="Web2" Target="Microsoft.AspNet.Web.Optimization 1.1.3" Category="Installed Package" Bounds="567.009261916697,39.3203624887168,858.737461716116,25.7774717616449" />
+    <Link Source="Web2" Target="Microsoft.IdentityModel.Clients.ActiveDirectory 2.16.204221202" Category="Installed Package" Bounds="1476.12003203367,-0.815501199839869,65.0383249957702,28.4112271084698" />
+    <Link Source="Web2" Target="Microsoft.jQuery.Unobtrusive.Validation 3.2.2" Category="Installed Package" Bounds="1476.28674316406,39.9072113037109,260.074584960938,17.3115653991699" />
+    <Link Source="Web2" Target="Modernizr 2.6.2" Category="Installed Package" Bounds="1470.03668978305,51.5418108469671,36.5261153813874,24.9269096435586" />
+    <Link Source="Web2" Target="Respond 1.2.0" Category="Installed Package" Bounds="92.2666473388672,40.781192779541,1333.4800567627,72.7890281677246" />
+    <Link Source="Web2" Target="WindowsAzure.Storage 4.4.1-preview" Category="Installed Package" Bounds="1454.3994140625,51.5418090820313,62.25,82.8253173828125" />
+    <Link Source="Web2" Target="bootstrap 3.0.0" Category="Installed Package" Bounds="1476.28672363281,42.1489815865333,130.034270011916,18.4588495657931" />
+    <Link Source="WebGrease 1.5.2" Target="Antlr 3.4.1.9004" Category="Package Dependency" Bounds="585.016662597656,137.880004882813,0,21" />
+    <Link Source="WebGrease 1.5.2" Target="Newtonsoft.Json 6.0.8" Category="Package Dependency" Bounds="619.577453613281,137.880004882813,71.4530639648438,26.8356781005859" />
+    <Link Source="WindowsAzure.Storage 4.4.1-preview" Target="Microsoft.Azure.KeyVault.Core 0.9.1-preview" Category="Package Dependency" Bounds="1094.31849047206,155.948195938137,357.554777757105,18.0728717638849" />
+    <Link Source="WindowsAzure.Storage 4.4.1-preview" Target="Microsoft.Data.OData 5.6.2" Category="Package Dependency" Bounds="1604.23754882813,163.462005615234,65.78369140625,82.1627044677734" />
+    <Link Source="WindowsAzure.Storage 4.4.1-preview" Target="Microsoft.Data.Services.Client 5.6.2" Category="Package Dependency" Bounds="1560.01661571966,163.462010846967,2.29046122512955E-05,21.0001000000053" />
+    <Link Source="WindowsAzure.Storage 4.4.1-preview" Target="Microsoft.WindowsAzure.ConfigurationManager 1.8.0.0" Category="Package Dependency" Bounds="1347.65329818219,163.462010846967,145.561435482229,28.2834521250485" />
+    <Link Source="WindowsAzure.Storage 4.4.1-preview" Target="Newtonsoft.Json 6.0.8" Category="Package Dependency" Bounds="809.394287109375,153.02961730957,642.47900390625,15.1353149414063" />
+    <Link Source="WindowsAzure.Storage 4.4.1-preview" Target="System.Spatial 5.6.2" Category="Package Dependency" Bounds="1604.23754882813,163.462005615234,112.381469726563,133.544586181641" />
+    <Link Source="jQuery.Validation 1.11.1" Target="jQuery 1.10.2" Category="Package Dependency" Bounds="1794.90762762875,137.880000254313,47.3099243782042,25.7035585473402" />
+  </Links>
+  <Categories>
+    <Category Id="Installed Package" />
+    <Category Id="Package" />
+    <Category Id="Package Dependency" />
+    <Category Id="Project" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+    <Property Id="ZoomLevel" DataType="System.String" />
+  </Properties>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Project" ValueLabel="True">
+      <Condition Expression="HasCategory('Project')" />
+      <Setter Property="Background" Value="Blue" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Package Dependency" ValueLabel="True">
+      <Condition Expression="HasCategory('Package Dependency')" />
+      <Setter Property="Background" Value="Yellow" />
+    </Style>
+  </Styles>
+</DirectedGraph>

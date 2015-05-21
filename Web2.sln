@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22609.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web2", "Web2\Web2.csproj", "{EAFCAAF2-16A5-4412-89C2-819F6B03A347}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{2871782A-4F28-45BF-ACAF-032898E2D3EC}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
+		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{ACC8456E-08A6-410C-9D7F-F62BDED5E16F}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\Web2-WAWS-dev.json = PublishScripts\Configurations\Web2-WAWS-dev.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.KeyVault.Client", "Microsoft.KeyVault.Client\Microsoft.KeyVault.Client.csproj", "{9A7C23FE-3D10-42AD-A9B8-8ED7AE290EB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.KeyVault.WebKey", "Microsoft.KeyVault.WebKey\Microsoft.KeyVault.WebKey.csproj", "{493472CB-F9C0-4312-A8F1-399641926F5E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EAFCAAF2-16A5-4412-89C2-819F6B03A347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAFCAAF2-16A5-4412-89C2-819F6B03A347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAFCAAF2-16A5-4412-89C2-819F6B03A347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAFCAAF2-16A5-4412-89C2-819F6B03A347}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A7C23FE-3D10-42AD-A9B8-8ED7AE290EB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A7C23FE-3D10-42AD-A9B8-8ED7AE290EB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A7C23FE-3D10-42AD-A9B8-8ED7AE290EB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A7C23FE-3D10-42AD-A9B8-8ED7AE290EB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{493472CB-F9C0-4312-A8F1-399641926F5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{493472CB-F9C0-4312-A8F1-399641926F5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{493472CB-F9C0-4312-A8F1-399641926F5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{493472CB-F9C0-4312-A8F1-399641926F5E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ACC8456E-08A6-410C-9D7F-F62BDED5E16F} = {2871782A-4F28-45BF-ACAF-032898E2D3EC}
+	EndGlobalSection
+EndGlobal
