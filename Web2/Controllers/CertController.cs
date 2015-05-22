@@ -20,9 +20,9 @@ namespace Web2.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Index(HttpPostedFileBase file, string pwd)
+        public ActionResult Index(HttpPostedFileBase file, string pwd, string keyName)
         {
-            string name = "Key2";
+            
             string message = "";
             // now you could pass the byte array to your model and store wherever 
             // you intended to store it
@@ -31,8 +31,8 @@ namespace Web2.Controllers
                 X509Certificate2 cert = new X509Certificate2(
                      new BinaryReader(file.InputStream).ReadBytes((int)file.InputStream.Length), pwd, X509KeyStorageFlags.Exportable);
 
-                KeyVaultAccessor.AddKey(cert, name );
-                message = "Added key: " + name;
+                KeyVaultAccessor.AddKey(cert, keyName );
+                message = "Added key: " + keyName;
             }
             catch (Exception ex)
             {
