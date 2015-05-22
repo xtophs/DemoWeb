@@ -1,6 +1,7 @@
 ﻿@{
-    Layout = null;
+    ViewBag.Title = "Upload a Cert";
 }
+
 
 <!DOCTYPE html>
 
@@ -10,18 +11,41 @@
     <title>Cert Page</title>
 </head>
 <body>
-    <div>
-        <h1>Upload your cert</h1>
-        <form action="" method="post" enctype="multipart/form-data">
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
 
-            <label for="file">Filename:</label>
-            <input type="file" name="file" id="file" />
-            <br />
-            <label>Password</label>
-            <input type="text" id="pwd" name="pwd" />
-            <br />
-            <input type="submit" />
-        </form>
-    </div>
+            <h1>Upload your cert</h1>
+            @*       <form action="" method="post" enctype="multipart/form-data">*@
+            <div class="form-group">
+                
+                    <div class="col-md-10">
+                        <label for="file" class="control-label col-md-2">Filename</label>
+                        <input type="file" name="file" id="file" class="form-control" />
+                    
+                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <label for="pwd" class="control-label col-md-2">Password</label>
+                    <input type="text" id="pwd" name="pwd" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <label for="keyName" class="control-label col-md-2">Key Name</label>
+                    <input type="text" id="Key Name" name="keyName" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Upload" />
+                </div>
+            </div>
+        </div>
+            @* </form>*@
+
+    }
 </body>
 </html>
