@@ -115,7 +115,7 @@ namespace Web2.Controllers
             }
             return View(model);
 
-            return View("~/Views/CreditRisk/CreditApplicationView.cshtml");
+           // return View("~/Views/CreditRisk/CreditApplicationView.cshtml");
         }
     }
 }

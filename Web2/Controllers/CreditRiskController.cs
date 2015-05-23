@@ -26,13 +26,26 @@ namespace Web2.Controllers
             return View("~/Views/CreditRisk/CreditApplicationView.cshtml");
         }
 
+        [HttpPost]
+        public JsonResult Index(CreditRiskApplication application)
+        {
+            //ScoreApplication(application);
+            //return View();
+
+            return Json(new 
+            {
+                Success = true,
+                Object = new { message = "Hi, Json"  }
+            });
+        }
+
         private void ScoreApplication(CreditRiskApplication application)
         {
-            var data = new CreditRiskApplication(
-    "A11", "12", "A32", "A43", "701", "A61", "A73", "4", "A94", "A101", "2", "A121", "40", "A143", "A152", "1", "172", "1", "A191", "A201", "1"
-    );
+            //var data = new CreditRiskApplication(
+   // "A11", "12", "A32", "A43", "701", "A61", "A73", "4", "A94", "A101", "2", "A121", "40", "A143", "A152", "1", "172", "1", "A191", "A201", "1"
+   // );
             
-            InvokeRequestResponseService(data).Wait();
+            InvokeRequestResponseService(application).Wait();
         }
 
         static async Task InvokeRequestResponseService(CreditRiskApplication application)

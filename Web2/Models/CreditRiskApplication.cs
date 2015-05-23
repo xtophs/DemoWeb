@@ -14,6 +14,8 @@ namespace Web2.Models
         }
 
         public CreditRiskApplication(
+            string fname,
+            string lname,
             string col1,
             string col2,
             string col3,
@@ -36,6 +38,8 @@ namespace Web2.Models
             string col20,
             string col21 )
         {
+            FirstName = fname;
+            LastName = lname;
             CheckingAccountStatus = col1;
             DurationInMonths = col2;
             CreditHistory = col3;
@@ -58,6 +62,9 @@ namespace Web2.Models
             ForeignWorker = col20;
             CreditRisk = col21;
         }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         public string CheckingAccountStatus { get; set; }
         public string DurationInMonths { get; set; }
