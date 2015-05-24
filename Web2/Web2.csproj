@@ -191,9 +191,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="KeyVaultAccessor.cs" />
+    <Compile Include="Models\CRAViewModel.cs" />
     <Compile Include="Models\CreditRiskApplication.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\MessageBoardModel.cs" />
+    <Compile Include="Models\RiskScore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="StorageTableAccessor.cs" />
@@ -242,6 +244,7 @@
     <Content Include="Views\CreditRisk\CreditApplicationView - Copy.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\History\HistoryView.cshtml" />
+    <Content Include="Views\CreditRisk\View2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

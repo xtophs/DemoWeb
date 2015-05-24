@@ -1,16 +1,27 @@
 ﻿@model Web2.Models.CreditRiskApplication
 
 @{
+    //if (Model == null) Model = new Web2.Models.CRAViewModel();
+    //if (Model.Message == null) Model.Message = "";
     ViewBag.Title = "CreditApplicationView";
+    var message = "bla";
+    //if (Model != null)
+    //{
+    //    //if (Model.Message != null)
+    //    //{
+    //    //    message = Model.Message;
+    //    //}
+
+    //}
 }
 
 <h2>CreditApplicationView</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
- 
-    
+
+
     <div class="form-horizontal">
         <h4>CreditRiskApplication</h4>
         <hr />
@@ -205,6 +216,11 @@
                 <input type="submit" value="Score Me!" class="btn btn-default" />
             </div>
         </div>
+
+<select onchange="setData(this.value);">
+    <option value="0" selected="selected"></option>
+    <option value="1" >Ed</option>
+</select>
     </div>
 }
 
@@ -212,35 +228,53 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+@{
+<h1> @message </h1>
+}
+
 <script language="javascript">
 
-    document.getElementById("FirstName").value = "Jason";
-    document.getElementById("LastName").value = "Dude";
-    document.getElementById("CheckingAccountStatus").value = "";
-    document.getElementById("DurationInMonths").value = "";
-    document.getElementById("CreditHistory").value = "";
-    doucment.getElementById("Purpose").value = "";
-    document.getElementById("CreditAmount").value = "";
-    document.getElementById("SavingsAccount").value = "";
-    document.getElementById("PresentEmploymentSince").value = "";
-    document.getElementById("InstallmentPecentageOfDI").value = "";
-    document.getElementById("PersonalStatusAndSex").value = "";
-    document.getElementById("OtherDebtors").value = "";
-    document.getElementById("PresentResidenceSince").value = "";
-    document.getElementById("Property").value = "";
-    document.getElementById("AgeInYears").value = "";
-    document.getElementById("OtherInstallments").value = "";
-    document.getElementById("Housing").value = "";
-    document.getElementById("NumberOfExistingCredits").value = "";
-    document.getElementById("Job").value = "";
-    document.getElementById("NumberOfPeopleLiable").value = "";
-    document.getElementById("Telephone").value = "";
-    document.getElementById("ForeignWorker").value = "";
-    document.getElementById("CreditRisk").value = "";
+    
+ 
 
+    function setData( index )
+    {
+
+
+        data = [
+    ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+    ["eddy", "halen", "A11", "12", "A32", "A43", "701", "A61", "A73", "4", "A94", "A101", "2", "A121", "40", "A143", "A152", "1", "172", "1", "A191", "A201", "1"]];
+
+    document.getElementById("FirstName").value = data[index][0];
+    document.getElementById("LastName").value = data[index][1];
+    document.getElementById("CheckingAccountStatus").value = data[index][2];
+    document.getElementById("DurationInMonths").value = data[index][3];
+    document.getElementById("CreditHistory").value = data[index][4];
+    document.getElementById("Purpose").value = data[index][5];
+    document.getElementById("CreditAmount").value = data[index][6];
+    document.getElementById("SavingsAccount").value = data[index][7];
+    document.getElementById("PresentEmploymentSince").value = data[index][8];
+    document.getElementById("InstallmentPecentageOfDI").value = data[index][9];
+    document.getElementById("PersonalStatusAndSex").value = data[index][10];
+    document.getElementById("OtherDebtors").value = data[index][11];
+    document.getElementById("PresentResidenceSince").value = data[index][12];
+    document.getElementById("Property").value = data[index][13];
+    document.getElementById("AgeInYears").value = data[index][14];
+    document.getElementById("OtherInstallments").value = data[index][15];
+    document.getElementById("Housing").value = data[index][16];
+    document.getElementById("NumberOfExistingCredits").value = data[index][17];
+    document.getElementById("Job").value = data[index][18];
+    document.getElementById("NumberOfPeopleLiable").value = data[index][19];
+    document.getElementById("Telephone").value = data[index][20];
+    document.getElementById("ForeignWorker").value = data[index][21];
+    document.getElementById("CreditRisk").value = data[index][22];
+
+    }
 
 
 

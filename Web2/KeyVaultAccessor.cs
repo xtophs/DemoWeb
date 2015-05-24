@@ -73,5 +73,15 @@ namespace Web2
             return result.AccessToken;
         }
 
+        public static async Task<string> GetAccessTokenWithAuthority(string authority, string resource, string scope)
+        {
+            ClientCredential credential = new ClientCredential(CloudConfigurationManager.GetSetting("KVClientId"), CloudConfigurationManager.GetSetting("KVClientKey"));
+
+            AuthenticationContext ctx = new AuthenticationContext(new Uri(authority).AbsoluteUri, false);
+            AuthenticationResult result = await ctx.AcquireTokenAsync(resource, credential);
+
+            return result.AccessToken;
+        }
+
     }
 }
