@@ -234,7 +234,6 @@
     </Compile>
     <Compile Include="KeyVaultAccessor.cs" />
     <Compile Include="LocalResolver.cs" />
-    <Compile Include="Models\CRAViewModel.cs" />
     <Compile Include="Models\CreditRiskApplication.cs" />
     <Compile Include="Models\RiskScore.cs" />
     <Compile Include="Models\VaultCredentials.cs" />
