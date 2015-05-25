@@ -1,4 +1,4 @@
-﻿using Microsoft.KeyVault.Client;
+﻿using Microsoft.Azure.KeyVault;
 using System;
 using System.Collections.Generic;
 using System.IO;

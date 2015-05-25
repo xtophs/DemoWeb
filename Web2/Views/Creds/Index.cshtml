@@ -1,0 +1,62 @@
+﻿@model Web2.Models.VaultCredentials
+
+@{
+    ViewBag.Title = "Upload your Key Vault Credentials";
+}
+
+@using (Html.BeginForm())
+{
+    <h1>Upload your Credentials</h1>
+    <div class="form-horizontal">
+        <h4>CreditRiskApplication</h4>
+                
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SecretUri, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SecretUri, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SecretUri, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.KVClientID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.KVClientID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.KVClientID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.KVClientKeySecret, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.KVClientKeySecret, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.KVClientKeySecret, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Secure Me!" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script language="javascript">
+
+    document.getElementById("SecretUri").value = "https://ckeyvault.vault.azure.net:443/secrets/secret";
+    document.getElementById("KVClientID"). value  = "9961e7e9-bf5d-4641-8038-8d6e40308122";
+    document.getElementById("KVClientKeySecret").value = "+HEBib6PyYf+UHAje4tfVea0aJrVqBcZdTXuhdCbFfI=";
+
+
+</script>
+
+

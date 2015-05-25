@@ -1,18 +1,8 @@
 ﻿@model Web2.Models.CreditRiskApplication
 
 @{
-    //if (Model == null) Model = new Web2.Models.CRAViewModel();
-    //if (Model.Message == null) Model.Message = "";
     ViewBag.Title = "CreditApplicationView";
-    var message = "bla";
-    //if (Model != null)
-    //{
-    //    //if (Model.Message != null)
-    //    //{
-    //    //    message = Model.Message;
-    //    //}
 
-    //}
 }
 
 <h2>CreditApplicationView</h2>
@@ -233,15 +223,8 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-@{
-<h1> @message </h1>
-}
 
 <script language="javascript">
-
-    
- 
-
     function setData( index )
     {
 
@@ -275,14 +258,4 @@
     document.getElementById("CreditRisk").value = data[index][22];
 
     }
-
-
-
-
-
-
-
-
-
-
 </script>

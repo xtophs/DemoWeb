@@ -23,8 +23,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
 @if (Request.IsAuthenticated)
 {
-                    <li>@Html.ActionLink("History", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Upload Cert", "Index", "Cert")</li>
+                    <li>@Html.ActionLink("Upload Credentials", "Index", "Creds")</li>
 }
                     @Html.Partial("_LoginPartial")
                 </ul>

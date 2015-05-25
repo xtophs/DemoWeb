@@ -29,7 +29,15 @@ namespace Web2.Controllers
         // GET: CreditRisk
         public ActionResult Index()
         {
-
+            if( KeyVaultAccessor.creds == null )
+            {
+                //KeyVaultAccessor.creds = new VaultCredentials()
+                //{
+                //    SecretUri = "https://ckeyvault.vault.azure.net:443/secrets/secret",
+                //    KVClientID = "9961e7e9-bf5d-4641-8038-8d6e40308122",
+                //    KVClientKeySecret = "+HEBib6PyYf+UHAje4tfVea0aJrVqBcZdTXuhdCbFfI="
+                //};
+            }
             return View("~/Views/CreditRisk/CreditApplicationView.cshtml");
         }
 
@@ -155,53 +163,67 @@ namespace Web2.Controllers
 
         static void Record(CreditRiskApplication data, RiskScore score)
         {
-            KeyVaultKeyResolver cloudResolver = new KeyVaultKeyResolver(KeyVaultAccessor.GetAccessTokenWithAuthority);
+            var entity = new RiskScoreEntity()
+            {
+                FirstName = data.FirstName,
+                LastName = data.LastName,
+                Probability = score.Probability,
+                Label = score.Label,
+                PartitionKey = "1",
+                RowKey = DateTime.Now.Ticks.ToString()
+            };
 
-            // await causes the function to hang.
-            // GetAwaiter().GetResult() works
-            //Secret cloudSecret = cloudVault.SetSecretAsync(vaultUri, "secret", symmetricBytes, null, "application/octet-stream").GetAwaiter().GetResult();
-            // cloudResolver: await hangs.
-            // cloudResolver: GetAwaiter().GetResult() hangs.
-            var secretId = "https://ckeyvault.vault.azure.net:443/secrets/secret";
-            cloudResolver.ResolveKeyAsync(secretId, CancellationToken.None).ContinueWith(
-                k =>
-                {
-                    Trace.WriteLine("in lambda");
-                    var waiter = k.GetAwaiter();
-                    while (waiter.IsCompleted == false)
-                    {
-                        Thread.Sleep(1000);
-                        Trace.WriteLine("one more");
-                    }
-                    IKey cloudKey = waiter.GetResult();
-                    Trace.WriteLine("got key");
+            if (KeyVaultAccessor.creds != null)
+            {
+                KeyVaultKeyResolver cloudResolver = new KeyVaultKeyResolver(KeyVaultAccessor.GetAccessTokenWithAuthority);
 
-                    try
+                // await causes the function to hang.
+                // GetAwaiter().GetResult() works
+                //Secret cloudSecret = cloudVault.SetSecretAsync(vaultUri, "secret", symmetricBytes, null, "application/octet-stream").GetAwaiter().GetResult();
+                // cloudResolver: await hangs.
+                // cloudResolver: GetAwaiter().GetResult() hangs.
+                //var secretId = "https://ckeyvault.vault.azure.net:443/secrets/secret";
+                cloudResolver.ResolveKeyAsync(KeyVaultAccessor.creds.SecretUri, CancellationToken.None).ContinueWith(
+                    k =>
                     {
-                        var entity = new RiskScoreEntity()
+                        Trace.WriteLine("in lambda");
+                        var waiter = k.GetAwaiter();
+                        while (waiter.IsCompleted == false)
                         {
-                            FirstName = data.FirstName,
-                            LastName = data.LastName,
-                            Probability = score.Probability,
-                            Label = score.Label,
-                            PartitionKey = "1",
-                            RowKey = DateTime.Now.Ticks.ToString()
-                        };
+                            Thread.Sleep(1000);
+                            Trace.WriteLine("one more");
+                        }
+                        IKey cloudKey = waiter.GetResult();
+                        Trace.WriteLine("got key");
 
-                        // Insert Entity
-                        GetTable().Execute(
-                            TableOperation.Insert(entity), 
-                            new TableRequestOptions()
-                            {
-                                EncryptionPolicy = new TableEncryptionPolicy(cloudKey, null)
-                            }, 
-                            null);
-                    }
-                    finally
-                    {
-                        //table.DeleteIfExists();
-                    }
-                });
+                        try
+                        {
+
+                            // Insert Entity
+                            GetTable().Execute(
+                                TableOperation.Insert(entity),
+                                new TableRequestOptions()
+                                {
+                                    EncryptionPolicy = new TableEncryptionPolicy(cloudKey, null)
+                                },
+                                null);
+                        }
+                        finally
+                        {
+                            //table.DeleteIfExists();
+                        }
+
+                    });
+            }
+            else
+            {
+
+                // Insert Entity
+                GetTable().Execute(
+                    TableOperation.Insert(entity),
+                    null,
+                    null);
+            }
         }
 
         private static CloudStorageAccount CreateStorageAccountFromConnectionString(string storageConnectionString)
