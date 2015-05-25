@@ -29,15 +29,6 @@ namespace Web2.Controllers
         // GET: CreditRisk
         public ActionResult Index()
         {
-            if( KeyVaultAccessor.creds == null )
-            {
-                //KeyVaultAccessor.creds = new VaultCredentials()
-                //{
-                //    SecretUri = "https://ckeyvault.vault.azure.net:443/secrets/secret",
-                //    KVClientID = "9961e7e9-bf5d-4641-8038-8d6e40308122",
-                //    KVClientKeySecret = "+HEBib6PyYf+UHAje4tfVea0aJrVqBcZdTXuhdCbFfI="
-                //};
-            }
             return View("~/Views/CreditRisk/CreditApplicationView.cshtml");
         }
 
@@ -196,22 +187,14 @@ namespace Web2.Controllers
                         IKey cloudKey = waiter.GetResult();
                         Trace.WriteLine("got key");
 
-                        try
-                        {
-
-                            // Insert Entity
-                            GetTable().Execute(
-                                TableOperation.Insert(entity),
-                                new TableRequestOptions()
-                                {
-                                    EncryptionPolicy = new TableEncryptionPolicy(cloudKey, null)
-                                },
-                                null);
-                        }
-                        finally
-                        {
-                            //table.DeleteIfExists();
-                        }
+                        // Insert Entity
+                        GetTable().Execute(
+                            TableOperation.Insert(entity),
+                            new TableRequestOptions()
+                            {
+                                EncryptionPolicy = new TableEncryptionPolicy(cloudKey, null)
+                            },
+                            null);
 
                     });
             }
@@ -235,139 +218,10 @@ namespace Web2.Controllers
             }
             catch (FormatException)
             {
-                Console.WriteLine("Invalid storage account information provided. Please confirm the AccountName and AccountKey are valid in the app.config file - then restart the sample.");
-                Console.WriteLine("Press any key to exit");
-                Console.ReadLine();
+                Trace.WriteLine("Invalid storage account information provided. Please confirm the AccountName and AccountKey are valid in the app.config file - then restart the sample.");
                 throw;
             }
             return storageAccount;
-        }
-
-
-        //static async Task Record(CreditRiskApplication data, RiskScore score)
-        //{
-
-
-        //    TableRequestOptions insertOptions = await GetEncryptedInsertOptions();
-        //    CloudTable table = GetTable();
-
-        //    try
-        //    {
-        //        var entity = new RiskScoreEntity()
-        //        {
-        //            FirstName = data.FirstName,
-        //            LastName = data.LastName,
-        //            Probability = score.Probability,
-        //            Label = score.Label,
-        //            PartitionKey = "1",
-        //            RowKey = DateTime.Now.Ticks.ToString()
-        //        };
-
-        //        // Insert Entity
-        //        table.Execute(TableOperation.Insert(entity), insertOptions, null);
-
-        //        // For retrieves, a resolver can be set up that will help pick the key based on the key id.
-        //        //LocalResolver resolver = new LocalResolver();
-        //        //resolver.Add(key);
-
-        //        //TableRequestOptions retrieveOptions = new TableRequestOptions()
-        //        //{
-        //        //    EncryptionPolicy = new TableEncryptionPolicy(null, cachingResolver)
-        //        //};
-
-        //        //// Retrieve Entity
-        //        //TableOperation operation = TableOperation.Retrieve(p.PartitionKey, p.RowKey);
-        //        //TableResult result = table.Execute(operation, retrieveOptions, null);
-
-        //    }
-        //    finally
-        //    {
-        //        //table.DeleteIfExists();
-        //    }
-        //}
-
-        //private static CloudStorageAccount CreateStorageAccountFromConnectionString(string storageConnectionString)
-        //{
-        //    CloudStorageAccount storageAccount;
-        //    try
-        //    {
-        //        storageAccount = CloudStorageAccount.Parse(storageConnectionString);
-        //    }
-        //    catch (FormatException)
-        //    {
-        //        Console.WriteLine("Invalid storage account information provided. Please confirm the AccountName and AccountKey are valid in the app.config file - then restart the sample.");
-        //        Console.WriteLine("Press any key to exit");
-        //        Console.ReadLine();
-        //        throw;
-        //    }
-        //    return storageAccount;
-        //}
-
-        public static async Task<TableRequestOptions> GetEncryptedInsertOptions()
-        {
-            TableRequestOptions insertOptions = null;
-
-            if (KeyVaultAccessor.creds != null)
-            {
-                // Get reference to a Cloud Key Vault and key resolver.
-                KeyVaultClient cloudVault = new KeyVaultClient(KeyVaultAccessor.GetAccessTokenWithAuthority);
-                KeyVaultKeyResolver cloudResolver = new KeyVaultKeyResolver(KeyVaultAccessor.GetAccessTokenWithAuthority);
-
-                // Get reference to a local key and key resolver.
-                RsaKey rsaKey = new RsaKey("rsakey");
-                LocalResolver resolver = new LocalResolver();
-                resolver.Add(rsaKey);
-
-                // If there are multiple key sources like Azure Key Vault and local KMS, set up an aggregate resolver as follows.
-                // This helps users to define a plugin model for all the different key providers they support.
-                AggregateKeyResolver aggregateResolver = new AggregateKeyResolver()
-                    .Add(resolver)
-                    .Add(cloudResolver);
-
-                // Set up a caching resolver so the secrets can be cached on the client. This is the recommended usage pattern since the throttling
-                // targets for Storage and Key Vault services are orders of magnitude different.
-                CachingKeyResolver cachingResolver = new CachingKeyResolver(2, aggregateResolver);
-
-                // Establish a symmetric KEK stored as a Secret in the cloud key vault
-                //string vaultUri = KeyVaultAccessor.creds.VaultUri;
-                string vaultUri = CloudConfigurationManager.GetSetting("VaultUri"); 
-
-                try
-                {
-                    await cloudVault.DeleteSecretAsync(vaultUri, "secret");
-                }
-
-                catch (KeyVaultClientException ex)
-                {
-                    if (ex.Status != System.Net.HttpStatusCode.NotFound)
-                        throw;
-                }
-                catch (Exception ex)
-                {
-                    Trace.WriteLine(ex.ToString());
-                    throw ex;
-
-                }
-
-                // Create a symmetric 256bit symmetric key and convert it to Base64
-                SymmetricKey symmetricKey = new SymmetricKey("secret", SymmetricKey.KeySize256);
-                string symmetricBytes = Convert.ToBase64String(symmetricKey.Key);
-
-                // Store the Base64 of the key in the key vault. This is shown inline for simplicity but
-                // the recommended approach is to create this key offline and upload it to key vault and
-                // then use secrets base identifier as a parameter to resolve the current version of the
-                // secret for encryption. Note that the content-type of the secret must
-                // be application/octet-stream or the KeyVaultKeyResolver will refuse to load it as a key.
-                Secret cloudSecret = await cloudVault.SetSecretAsync(vaultUri, "secret", symmetricBytes, null, "application/octet-stream");
-                IKey cloudKey = await cachingResolver.ResolveKeyAsync(cloudSecret.SecretIdentifier.BaseIdentifier, CancellationToken.None);
-
-                insertOptions = new TableRequestOptions()
-                {
-                    EncryptionPolicy = new TableEncryptionPolicy(rsaKey, null)
-                };
-            }
-
-            return insertOptions;
         }
 
         public  static CloudTable GetTable()
