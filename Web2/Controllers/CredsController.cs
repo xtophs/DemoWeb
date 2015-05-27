@@ -20,7 +20,9 @@ namespace Web2.Controllers
         public ActionResult Index(VaultCredentials creds)
         {
             KeyVaultAccessor.creds = creds;
-            return View();
+            ViewBag.Message = "yOO HOO";
+            return PartialView("MessageView");
         }
+
     }
 }

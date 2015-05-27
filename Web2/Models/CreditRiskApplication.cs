@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -85,9 +86,12 @@ namespace Web2.Models
             CreditRisk = col21;
         }
 
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
 
+        [DisplayName("Checking Account Status")]
         public string CheckingAccountStatus { get; set; }
         public string DurationInMonths { get; set; }
         public string CreditHistory { get; set; }

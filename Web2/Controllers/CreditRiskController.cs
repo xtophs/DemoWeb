@@ -29,6 +29,7 @@ namespace Web2.Controllers
         // GET: CreditRisk
         public ActionResult Index()
         {
+
             return View("~/Views/CreditRisk/CreditApplicationView.cshtml");
         }
 
@@ -36,9 +37,17 @@ namespace Web2.Controllers
         public ActionResult Index(CreditRiskApplication applicationData)
         {
             var Score = ScoreApplication(applicationData);
-
+            if (Score.Label == "2")
+            {
+                ViewBag.Message = "You're probably high risk. With a " + Math.Round((Convert.ToDouble(Score.Probability) * 100.0), 1).ToString() + "% probability.";
+            }
+            else
+            {
+                ViewBag.Message = "Chances are you're low risk. In fact, chances are: " + Math.Round((Convert.ToDouble(Score.Probability) * 100.0), 1).ToString() + "%.";
+            }
+            ModelState.Clear();
             Record(applicationData, Score);
-            return View("~/Views/CreditRisk/CreditApplicationView.cshtml");
+            return PartialView("~/Views/CreditRisk/ScoreView.cshtml");
         }
 
         private RiskScore ScoreApplication(CreditRiskApplication application)

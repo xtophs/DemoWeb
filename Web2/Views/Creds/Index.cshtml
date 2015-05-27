@@ -4,7 +4,12 @@
     ViewBag.Title = "Upload your Key Vault Credentials";
 }
 
-@using (Html.BeginForm())
+@using (Ajax.BeginForm( "Index", "Creds",  new AjaxOptions()
+{ 
+    UpdateTargetId = "Target",
+    InsertionMode = InsertionMode.Replace
+}
+))
 {
     <h1>Upload your Credentials</h1>
     <div class="form-horizontal">
@@ -39,7 +44,20 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Secure Me!" class="btn btn-default" />
+                    <input type="submit" value="Secure Me" class="btn btn-default" />
+
+
+            </div>
+        </div>
+
+        <div id="Target">blabla</div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <select onchange="setData(this.value);">
+                    <option value="0" selected="selected"></option>
+                    <option value="1">Tony's Creds</option>
+                </select>
             </div>
         </div>
 
@@ -48,15 +66,34 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 }
 
 <script language="javascript">
 
-    document.getElementById("SecretUri").value = "https://ckeyvault.vault.azure.net:443/secrets/secret";
-    document.getElementById("KVClientID"). value  = "9961e7e9-bf5d-4641-8038-8d6e40308122";
-    document.getElementById("KVClientKeySecret").value = "+HEBib6PyYf+UHAje4tfVea0aJrVqBcZdTXuhdCbFfI=";
+    function UpdateResult() {
+        alert('updateresult');
+        document.getElementById("result").textContent = "Credentials Submitted"
+    }
 
+    function UpdateResult() {
+        alert('updatefailure');
+        document.getElementById("result").textContent = "Something went wrong"
+    }
 
+    function clear()
+    {
+        alert('clear');
+        document.forms.i[0].clear();
+    }
+        
+    function setData( index )
+    {
+ 
+        document.getElementById("SecretUri").value = "https://ckeyvault.vault.azure.net:443/secrets/secret";
+        document.getElementById("KVClientID").value = "9961e7e9-bf5d-4641-8038-8d6e40308122";
+        document.getElementById("KVClientKeySecret").value = "+HEBib6PyYf+UHAje4tfVea0aJrVqBcZdTXuhdCbFfI=";
+    }
 </script>
 
 
