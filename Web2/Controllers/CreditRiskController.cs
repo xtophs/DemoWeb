@@ -24,17 +24,17 @@ namespace Web2.Controllers
         public string[,] Values { get; set; }
     }
 
-    public class CreditRiskController : Controller
+    public class CreditRiskController : AsyncController
     {
         // GET: CreditRisk
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
 
             return View("~/Views/CreditRisk/CreditApplicationView.cshtml");
         }
 
         [HttpPost]
-        public ActionResult Index(CreditRiskApplication applicationData)
+        public async Task<ActionResult> Index(CreditRiskApplication applicationData)
         {
             var Score = ScoreApplication(applicationData);
             if (Score.Label == "2")
@@ -46,7 +46,7 @@ namespace Web2.Controllers
                 ViewBag.Message = "Chances are you're low risk. In fact, chances are: " + Math.Round((Convert.ToDouble(Score.Probability) * 100.0), 1).ToString() + "%.";
             }
             ModelState.Clear();
-            Record(applicationData, Score);
+            await Record(applicationData, Score);
             return PartialView("~/Views/CreditRisk/ScoreView.cshtml");
         }
 
@@ -161,7 +161,7 @@ namespace Web2.Controllers
 
         }
 
-        static void Record(CreditRiskApplication data, RiskScore score)
+        static async Task Record(CreditRiskApplication data, RiskScore score)
         {
             var entity = new RiskScoreEntity()
             {
@@ -183,17 +183,18 @@ namespace Web2.Controllers
                 // cloudResolver: await hangs.
                 // cloudResolver: GetAwaiter().GetResult() hangs.
                 //var secretId = "https://ckeyvault.vault.azure.net:443/secrets/secret";
-                cloudResolver.ResolveKeyAsync(KeyVaultAccessor.creds.SecretUri, CancellationToken.None).ContinueWith(
-                    k =>
-                    {
-                        Trace.WriteLine("in lambda");
-                        var waiter = k.GetAwaiter();
-                        while (waiter.IsCompleted == false)
-                        {
-                            Thread.Sleep(1000);
-                            Trace.WriteLine("one more");
-                        }
-                        IKey cloudKey = waiter.GetResult();
+                IKey cloudKey = await cloudResolver.ResolveKeyAsync(KeyVaultAccessor.creds.SecretUri, CancellationToken.None);
+                //cloudResolver.ResolveKeyAsync(KeyVaultAccessor.creds.SecretUri, CancellationToken.None).ContinueWith(
+                //    k =>
+                //    {
+                //        Trace.WriteLine("in lambda");
+                //        var waiter = k.GetAwaiter();
+                //        while (waiter.IsCompleted == false)
+                //        {
+                //            Thread.Sleep(1000);
+                //            Trace.WriteLine("one more");
+                //        }
+                //        IKey cloudKey = waiter.GetResult();
                         Trace.WriteLine("got key");
 
                         // Insert Entity
@@ -205,7 +206,7 @@ namespace Web2.Controllers
                             },
                             null);
 
-                    });
+                    //});
             }
             else
             {
