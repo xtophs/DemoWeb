@@ -16,11 +16,18 @@ namespace Web2.Controllers
 
             return View();
         }
+
+        public ActionResult Reset()
+        {
+            TableHelper.GetTable().DeleteIfExists();
+            KeyVaultAccessor.creds = null;
+            return View("reset");
+        }
         [HttpPost]
         public ActionResult Index(VaultCredentials creds)
         {
             KeyVaultAccessor.creds = creds;
-            ViewBag.Message = "yOO HOO";
+            ViewBag.Message = "Key Received";
             return PartialView("MessageView");
         }
 

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Web2.Models.RiskScoreEntity>
+@{
+    ViewBag.Title = "Applications";
+}
+
+<h2>Applications</h2>
+
+<table>
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Label)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Probability)
+            </td>
+        </tr>
+    }
+}
+</table>
+

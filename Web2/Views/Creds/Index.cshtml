@@ -13,7 +13,6 @@
 {
     <h1>Upload your Credentials</h1>
     <div class="form-horizontal">
-        <h4>CreditRiskApplication</h4>
                 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -50,13 +49,13 @@
             </div>
         </div>
 
-        <div id="Target">blabla</div>
+        <div id="Target"></div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <select onchange="setData(this.value);">
                     <option value="0" selected="selected"></option>
-                    <option value="1">Tony's Creds</option>
+                    <option value="1">Greg's Creds</option>
                 </select>
             </div>
         </div>

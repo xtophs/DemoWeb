@@ -1,7 +1,7 @@
 ﻿@model Web2.Models.CreditRiskApplication
 
 @{
-    ViewBag.Title = "CreditApplicationView";
+    ViewBag.Title = "Enter Your Application Details";
 
 }
 
@@ -229,6 +229,7 @@
                 <select onchange="setData(this.value);">
                     <option value="0" selected="selected"></option>
                     <option value="1">Ed</option>
+                    <option value="2">Dave</option>
                 </select>
             </div>
         </div>
@@ -252,7 +253,9 @@
 
         data = [
     ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-    ["eddy", "halen", "A11", "12", "A32", "A43", "701", "A61", "A73", "4", "A94", "A101", "2", "A121", "40", "A143", "A152", "1", "172", "1", "A191", "A201", "1"]];
+    ["eddy", "halen", "A11", "12", "A32", "A43", "701", "A61", "A73", "4", "A94", "A101", "2", "A121", "40", "A143", "A152", "1", "172", "1", "A191", "A201", "1"],
+    ["dave", "roth", "A11",	"6",	"A34",	"A43",	"1169",	"A65",	"A75",	"4",	"A93",	"A101",	"4",	"A121",	"67",	"A143",	"A152",	"2",	"A173",	"1",	"A192",	"A201",	"1"]
+        ];
 
         document.getElementById("FirstName").value = data[index][0];
         document.getElementById("LastName").value = data[index][1];

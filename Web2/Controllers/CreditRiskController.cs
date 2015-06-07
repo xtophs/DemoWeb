@@ -33,6 +33,23 @@ namespace Web2.Controllers
             return View("~/Views/CreditRisk/CreditApplicationView.cshtml");
         }
 
+        public async Task<ActionResult> Applications()
+        {
+            IEnumerable<RiskScoreEntity> scores = null;
+
+            var query = new TableQuery<RiskScoreEntity>().Where("");
+            try
+            {
+                scores = TableHelper.GetTable().ExecuteQuery<RiskScoreEntity>(query);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+
+            return View("Applications", scores);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Index(CreditRiskApplication applicationData)
         {
@@ -177,73 +194,30 @@ namespace Web2.Controllers
             {
                 KeyVaultKeyResolver cloudResolver = new KeyVaultKeyResolver(KeyVaultAccessor.GetAccessTokenWithAuthority);
 
-                // await causes the function to hang.
-                // GetAwaiter().GetResult() works
-                //Secret cloudSecret = cloudVault.SetSecretAsync(vaultUri, "secret", symmetricBytes, null, "application/octet-stream").GetAwaiter().GetResult();
-                // cloudResolver: await hangs.
-                // cloudResolver: GetAwaiter().GetResult() hangs.
-                //var secretId = "https://ckeyvault.vault.azure.net:443/secrets/secret";
                 IKey cloudKey = await cloudResolver.ResolveKeyAsync(KeyVaultAccessor.creds.SecretUri, CancellationToken.None);
-                //cloudResolver.ResolveKeyAsync(KeyVaultAccessor.creds.SecretUri, CancellationToken.None).ContinueWith(
-                //    k =>
-                //    {
-                //        Trace.WriteLine("in lambda");
-                //        var waiter = k.GetAwaiter();
-                //        while (waiter.IsCompleted == false)
-                //        {
-                //            Thread.Sleep(1000);
-                //            Trace.WriteLine("one more");
-                //        }
-                //        IKey cloudKey = waiter.GetResult();
+     
                         Trace.WriteLine("got key");
 
-                        // Insert Entity
-                        GetTable().Execute(
+                        // Insert Encrypted Entity
+                        TableHelper.GetTable().Execute(
                             TableOperation.Insert(entity),
                             new TableRequestOptions()
                             {
                                 EncryptionPolicy = new TableEncryptionPolicy(cloudKey, null)
                             },
                             null);
-
-                    //});
             }
             else
             {
 
                 // Insert Entity
-                GetTable().Execute(
+                TableHelper.GetTable().Execute(
                     TableOperation.Insert(entity),
                     null,
                     null);
             }
         }
 
-        private static CloudStorageAccount CreateStorageAccountFromConnectionString(string storageConnectionString)
-        {
-            CloudStorageAccount storageAccount;
-            try
-            {
-                storageAccount = CloudStorageAccount.Parse(storageConnectionString);
-            }
-            catch (FormatException)
-            {
-                Trace.WriteLine("Invalid storage account information provided. Please confirm the AccountName and AccountKey are valid in the app.config file - then restart the sample.");
-                throw;
-            }
-            return storageAccount;
-        }
-
-        public  static CloudTable GetTable()
-        {
-            string demoTable = "ScoreResults";
-            CloudStorageAccount storageAccount = CreateStorageAccountFromConnectionString(CloudConfigurationManager.GetSetting("StorageConnectionString"));
-            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
-            CloudTable table = tableClient.GetTableReference(demoTable);
-
-            table.CreateIfNotExists();
-            return table;
-        }
     }
 
 }
